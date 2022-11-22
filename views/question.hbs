@@ -1,0 +1,17 @@
+<h3 class="topic">{{questionName}} Question for the {{username}}</h3>
+{{#if last}}
+<form action="http://localhost:3000/result">
+{{else}}
+<form action="http://localhost:3000/question">
+{{/if}}
+{{> question this.quest}}
+<input type="hidden" id="current_index" value={{send_index}} name="current_index"/>
+<input type="hidden" id="username" value={{username}} name="username"/>
+{{#if last}}
+<input type="submit" id="resultBtn" Value="Get to the Result!" class="btn" style='font-family: "Lucida Console", "Courier New", monospace;'/>
+{{else}}
+<input type="submit" id="nextBtn" Value="Next Question!" class="btn" style='font-family: "Lucida Console", "Courier New", monospace;'/>
+{{/if}}
+</form>
+<input type="hidden" id="current_index" Value={{current_index}}
+<script type="text/javascript" src="../scripts/colors.js"></script>
