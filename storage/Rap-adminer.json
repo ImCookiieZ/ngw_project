@@ -1,0 +1,55 @@
+{
+  "answers": [
+    [
+      "From 2004 until Now",
+      "From 1960 until 1970",
+      "From 1962 until 2016",
+      "From 1988 until Now"
+    ],
+    [
+      "From 1988 until Now",
+      "From 1992 until Now",
+      "From 1960 until 1970",
+      "From 1962 until 2016"
+    ],
+    [
+      "From 1960 until 1970",
+      "From 1988 until Now",
+      "From 1962 until 2016",
+      "From 1992 until Now"
+    ],
+    [
+      "From 1960 until 1970",
+      "From 2004 until Now",
+      "From 1992 until Now",
+      "From 1962 until 2016"
+    ],
+    [
+      "From 2004 until Now",
+      "From 1988 until Now",
+      "From 1962 until 2016",
+      "From 1992 until Now"
+    ]
+  ],
+  "questions": [
+    "When was Eminem active?",
+    "When was Eminem active?",
+    "When was Snoop Dogg active?",
+    "When was Snoop Dogg active?",
+    "When was Snoop Dogg active?"
+  ],
+  "expected": [
+    3,
+    0,
+    3,
+    2,
+    3
+  ],
+  "responses": [
+    0,
+    0,
+    3,
+    2,
+    3
+  ]
+}

@@ -1,3 +1,13 @@
+<div class="modal active" id="modal">
+    <div class="modal-header">
+        <button data-close-button class="close-button">&times;</button>
+    </div>
+    <div class="modal-body">
+        <img src="https://imgur.com/gtb3hzs.png" width="300px"><br/>
+        You successfully finished the quiz!
+        Take a look ar your results.
+    </div>
+</div>
 <h3 class="topic">{{questionName}} Results for the {{username}}</h3>
 {{> question this.quest_1}}
 <br/>
@@ -8,4 +18,7 @@
 {{> question this.quest_4}}
 <br/>
 {{> question this.quest_5}}
+<br/>
+<a href="/"><button class="btn"><label style="color: lightgrey;">Go back to home!</label></button></a>
+<br/>
 <br/>
