@@ -1,76 +1,76 @@
 {
   "answers": [
     [
-      "From 1988 until Now",
-      "From 1960 until Now",
-      "From 1960 until 1970",
-      "From 1992 until Now"
-    ],
-    [
-      "From 1987 until Now",
-      "From 1962 until 2016",
-      "From 1992 until Now",
-      "From 2004 until Now"
-    ],
-    [
-      "From 1962 until 2016",
-      "From 1992 until Now",
-      "From 1996 until Now",
-      "From 2004 until Now"
-    ],
-    [
-      "From 1988 until Now",
-      "From 1960 until 1970",
+      "From 2001 until Now",
       "From 2004 until Now",
-      "From 1962 until 2016"
+      "From 1962 until 2016",
+      "From 1988 until Now"
+    ],
+    [
+      "From 1962 until Now",
+      "From 1962 until 2016",
+      "From 1988 until Now",
+      "From 2004 until Now"
+    ],
+    [
+      "From 1962 until 2016",
+      "From 1960 until 1970",
+      "From 1988 until Now",
+      "From 2004 until Now"
+    ],
+    [
+      "From 1960 until Now",
+      "From 2004 until Now",
+      "From 1960 until 1970",
+      "From 1988 until Now"
     ],
     [
       "From 1988 until Now",
-      "From 1962 until Now",
+      "From 2004 until Now",
       "From 1992 until Now",
-      "From 1962 until 2016"
+      "From 1960 until 1970"
     ]
   ],
   "questions": [
+    "When was Katy Perry active?",
+    "When was David Bowie active?",
+    "When was Eminem active?",
     "When was The Beatles active?",
-    "When was Green Day active?",
-    "When was Linkin Park active?",
-    "When was Ed Sheeran active?",
-    "When was David Bowie active?"
+    "When was Ed Sheeran active?"
   ],
   "expected": [
-    2,
     0,
+    1,
     2,
     2,
-    3
+    1
   ],
   "responses": [
+    1,
     2,
+    3,
     0,
     3,
     3,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2
+    0,
+    null,
+    null,
+    null,
+    null,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
   ]
 }
