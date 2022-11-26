@@ -64,15 +64,25 @@ const endpointUrl = 'https://dbpedia.org/sparql'
 // }
 
 // console.log(getPropertyData("Katy_Perry", ))
-const ARTISTS = {
-    rock: ["The_Beatles", "David_Bowie"],
-    alternative: [],
-    pop: ["Ed_Sheeran", "Katy_Perry"],
-    classic: [],
-    all: ["The_Beatles", "Ed_Sheeran", "Katy_Perry", "David_Bowie"]
+
+const WikidataIds = {
+    "Snoop_Dogg": "Q6096",
+    "award received" : "P166"
 }
-let arr = ARTISTS.all.slice()
-var removed = arr.splice(arr.indexOf("Ed_Sheeran"),1);
-console.log(removed)
-console.log(arr)
-console.log(ARTISTS)
+export const ENDPOINT_URL_WIKIDATA = 'https://query.wikidata.org/sparql'
+
+const test = async (artist_name, property) => {
+    const query = `SELECT ?object  WHERE { wd:${WikidataIds[artist_name]} wdt:${WikidataIds[property]} ?object . }`
+        const client = new ParsingClient({ 
+            endpointUrl: ENDPOINT_URL_WIKIDATA,  
+            headers: {"Accept": "application/json"}  
+        })
+        const bindings = await client.query.select(query)
+        bindings.forEach(row => 
+            Object.entries(row).forEach(([_, value]) => {
+                console.log(value.value)
+            })
+        )
+}
+await test("Snoop_Dogg", "award received")
+// console.log(WikidataIds["Snoop_Dogg"])

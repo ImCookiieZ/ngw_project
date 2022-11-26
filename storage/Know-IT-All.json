@@ -1,76 +1,55 @@
 {
   "answers": [
     [
-      "From 1988 until Now",
-      "From 1960 until Now",
-      "From 1960 until 1970",
-      "From 1992 until Now"
+      "8",
+      "13",
+      "7",
+      "12"
     ],
     [
-      "From 1987 until Now",
-      "From 1962 until 2016",
+      "13",
+      "7",
+      "11",
+      "3"
+    ],
+    [
+      "12",
+      "13",
+      "11",
+      "7"
+    ],
+    [
       "From 1992 until Now",
-      "From 2004 until Now"
-    ],
-    [
-      "From 1962 until 2016",
-      "From 1992 until Now",
-      "From 1996 until Now",
-      "From 2004 until Now"
-    ],
-    [
-      "From 1988 until Now",
-      "From 1960 until 1970",
+      "From 1962 until Now",
       "From 2004 until Now",
       "From 1962 until 2016"
     ],
     [
-      "From 1988 until Now",
-      "From 1962 until Now",
-      "From 1992 until Now",
-      "From 1962 until 2016"
+      "8",
+      "3",
+      "12",
+      "1"
     ]
   ],
   "questions": [
-    "When was The Beatles active?",
-    "When was Green Day active?",
-    "When was Linkin Park active?",
-    "When was Ed Sheeran active?",
-    "When was David Bowie active?"
+    "How many awards had The Beatles got?",
+    "How many awards had Snoop Dogg got?",
+    "How many awards had Katy Perry got?",
+    "When was David Bowie active?",
+    "How many awards had Green Day got?"
   ],
   "expected": [
-    2,
     0,
-    2,
-    2,
+    1,
+    1,
+    3,
     3
   ],
   "responses": [
-    2,
+    1,
     0,
+    2,
     3,
-    3,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
     2
   ]
 }
