@@ -128,8 +128,6 @@ export const QUESTIONS = [{
             const random_artist = getRandomArtistExceptDone(artists_done)
             const award_ids = await getPropertyDataWikidata(random_artist, "award received")
             const str = `${award_ids.values.length}`
-            console.log(str)
-            console.log(random_artist)
             if (possible_answers.includes(str) || correct_answer == str) {
                 continue
             }

@@ -1,0 +1,49 @@
+{
+  "answers": [
+    [
+      "From 1992 until Now",
+      "From 1960 until 1970",
+      "From 1960 until Now",
+      "From 1988 until Now"
+    ],
+    [
+      "13",
+      "8",
+      "1",
+      "7"
+    ],
+    [
+      "12",
+      "1",
+      "8",
+      "7"
+    ],
+    [
+      "13",
+      "1",
+      "7",
+      "3"
+    ],
+    [
+      "From 1987 until Now",
+      "From 2004 until Now",
+      "From 1992 until Now",
+      "From 1962 until 2016"
+    ]
+  ],
+  "questions": [
+    "When was The Beatles active?",
+    "How many awards had Snoop Dogg got?",
+    "How many awards had The Beatles got?",
+    "How many awards had Katy Perry got?",
+    "When was Green Day active?"
+  ],
+  "expected": [
+    1,
+    3,
+    2,
+    0,
+    0
+  ],
+  "responses": []
+}

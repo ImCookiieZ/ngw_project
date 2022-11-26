@@ -13,7 +13,7 @@ app.set('view engine', 'hbs');
 app.engine('hbs', handlebars.engine({
     layoutsDir: './views/layouts',
     extname: 'hbs',
-    defaultLayout: 'index',
+    defaultLayout: 'standard',
     partialsDir: './views/partials/',
 }));
 
@@ -23,7 +23,7 @@ app.use(express.static('public'))
 app.listen(port, () => console.log(`App listening to port ${port}`));
 
 app.get('/', (req, res) => {
-    res.render('chooseAUser');
+    res.render('chooseAUser', {layout: "start"});
 });
 
 app.get('/question', async (req, res) => {
@@ -45,7 +45,6 @@ app.get('/question', async (req, res) => {
   }
   
   const data = {
-    layout: 'index', 
     username: username, 
     last: current_index == 4, 
     questionName:  questionNumbers[current_index],
@@ -69,7 +68,6 @@ app.get('/result', (req, res) => {
 
   const quests = helpers.create_question_data(userData);
   const data = {
-    layout: 'index', 
     username: username, 
     quest_1: quests[0],
     quest_2: quests[1],

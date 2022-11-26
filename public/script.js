@@ -3,7 +3,6 @@ const overlay = document.getElementById('overlay')
 closeButton.forEach(button => {
     button.addEventListener('click', () => {
         const modal = button.closest('.modal')
-        console.log("clse")
         closeModal(modal)
     })
 })

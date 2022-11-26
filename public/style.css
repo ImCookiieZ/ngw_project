@@ -10,6 +10,14 @@ h1 {
     margin: 15px;
 }
 
+.start-page {
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
 /* all topics of a side */
 .topic {
     font-size: 27px;
