@@ -76,7 +76,7 @@ const getRandomSongFromArtistDbpedia = async (artist_name) => {
         if (songname.values.length == 0) {
             songname = await getPropertyDataDbpedia(link_songname, "foaf:name")
         }
-        return songname.values[0]
+        return `'${songname.values[0]}'`
 }
 
 const getPropertyDataWikidata = async (artist_name, property) => {
@@ -165,7 +165,7 @@ const activeQuestion = {
 
 }
 const archivementsQuestion = {
-    question: "How many awards had *artist* got?",
+    question: "How many awards did *artist* win?",
     getCorrectAnswer: async (artist_name) => {
         const award_ids = await getPropertyDataWikidata(artist_name, "award received")
         return `${award_ids.values.length}`
