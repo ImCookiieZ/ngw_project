@@ -47,8 +47,6 @@ const getRandomQuestions = async (username) => {
     for (let i = 0; i < 5;) {
         const users = queryArtistsFromUsers(username)
         let artist = getRandomFromList(users)
-        console.log(username)
-        console.log(artist)
         console.log(users)
         let tmp_question_data = getRandomFromList(QUESTIONS)
         let tmp_question = tmp_question_data.question.replace("*artist*", artist.replace("_", " "))

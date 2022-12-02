@@ -75,7 +75,7 @@ exo:Eminem a dbp:artist;
   wd:originId "P495".
 
 exo:Snoop_Dogg a dbp:artist;
-  exo:name "Snoop_Dogg";
+  exo:name "Snoop Dogg";
   wd:artitsId "Q6096";
   wd:awardId "P166";
   wd:citizenshipId "P27";

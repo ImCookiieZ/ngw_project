@@ -28,7 +28,6 @@ app.get('/', (req, res) => {
     layout: "start",
     users: users
   }
-  console.log(JSON.stringify(data))
     res.render('chooseAUser', data);
 });
 
