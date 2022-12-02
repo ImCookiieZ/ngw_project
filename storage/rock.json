@@ -1,0 +1,55 @@
+{
+  "answers": [
+    [
+      "From 1988 until Now",
+      "From 1962 until Now",
+      "From 1960 until 1970",
+      "From 1962 until 2016"
+    ],
+    [
+      "From 1960 until 1970",
+      "From 1988 until Now",
+      "From 1960 until Now",
+      "From 1962 until 2016"
+    ],
+    [
+      "From 1962 until Now",
+      "From 1960 until 1970",
+      "From 2004 until Now",
+      "From 1962 until 2016"
+    ],
+    [
+      "From 1960 until 1970",
+      "From 1962 until Now",
+      "From 2004 until Now",
+      "From 1962 until 2016"
+    ],
+    [
+      "From 2004 until Now",
+      "From 1962 until 2016",
+      "From 1960 until 1970",
+      "From 1962 until Now"
+    ]
+  ],
+  "questions": [
+    "When was David Bowie active?",
+    "When was The Beatles active?",
+    "When was David Bowie active?",
+    "When was David Bowie active?",
+    "When was David Bowie active?"
+  ],
+  "expected": [
+    3,
+    0,
+    3,
+    3,
+    1
+  ],
+  "responses": [
+    1,
+    3,
+    0,
+    3,
+    1
+  ]
+}

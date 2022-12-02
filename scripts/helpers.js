@@ -3,11 +3,11 @@ import { STANDARD_BACKGROUND, STANDARD_BORDER, QUESTIONS, STANDARD_TEXT } from "
 import $rdf from "rdflib";
 
 const gameString = fs.readFileSync("./storage/resources.ttl").toString();
-const gameStore = $rdf.graph();
-$rdf.parse(gameString, gameStore, "http://example.org", "text/turtle");
+const store = $rdf.graph();
+$rdf.parse(gameString, store, "http://example.org", "text/turtle");
 
 const queryAllUsers = () => {
-    const gameStringQuery = `
+    const queryString = `
         SELECT
             ?name ?genre ?id
         WHERE {
@@ -16,9 +16,9 @@ const queryAllUsers = () => {
             ?genre <http://example.org/#id> ?id .
         }
     `;
-    const gameQuery = $rdf.SPARQLToQuery(gameStringQuery, false, gameStore);
+    const gameQuery = $rdf.SPARQLToQuery(queryString, false, store);
     return(
-        gameStore.querySync(gameQuery).map((result) => {
+        store.querySync(gameQuery).map((result) => {
             return {name: result["?name"].value, id: result["?id"].value};
         })
     )
@@ -26,7 +26,7 @@ const queryAllUsers = () => {
 
 
 const getRandomArtistExceptDone = (artists_done) => {
-    let tmp_artist = ARTISTS.all.slice()
+    let tmp_artist = queryArtistsFromUsers("all")
 
     for (let i = artists_done.length -1; i >= 0; i--) {
         tmp_artist.splice(tmp_artist.indexOf(artists_done[i]), 1);
@@ -47,9 +47,8 @@ const getRandomQuestions = async (username) => {
     for (let i = 0; i < 5;) {
         const users = queryArtistsFromUsers(username)
         let artist = getRandomFromList(users)
-        console.log(users)
         let tmp_question_data = getRandomFromList(QUESTIONS)
-        let tmp_question = tmp_question_data.question.replace("*artist*", artist.replace("_", " "))
+        let tmp_question = tmp_question_data.question.replace("*artist*", artist.name)
         
         if (result_questions.includes(tmp_question)) {
             continue
@@ -120,19 +119,29 @@ const create_question_data = (userData) => {
 }  
 
 const queryArtistsFromUsers = (user) => {
-    const gameStringQuery = `
+    const queryString = `
         SELECT
-            ?name
+            ?name ?artistsId ?awardId ?from ?originId ?id
         WHERE {
             ?artist a <http://dbpedia.org/ontology/#artist> .
+            ?artist <http://example.org/#artistsId> ?artistsId .
+            ?artist <http://example.org/#awardId> ?awardId .
+            ?artist <http://example.org/#from> ?from .
             ?artist <http://example.org/#name> ?name .
+            ?artist <http://example.org/#id> ?id .
+            ${user == "all" ? "" : `?artist <http://example.org/#genre> <http://example.org/#${user}> .`}
         }
     `;
-    const gameQuery = $rdf.SPARQLToQuery(gameStringQuery, false, gameStore);
-    
+    const gameQuery = $rdf.SPARQLToQuery(queryString, false, store);
     return(
-        gameStore.querySync(gameQuery).map((result) => {
-            return result["?name"].value;
+        store.querySync(gameQuery).map((result) => {
+            return ({
+                "name": result["?name"].value, 
+                "artistId": result["?artistsId"].value, 
+                "awardId": result["?awardId"].value, 
+                "from": result["?from"].value, 
+                "id": result["?id"].value
+            });
         })
     )
 }

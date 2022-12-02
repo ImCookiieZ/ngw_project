@@ -1,6 +1,5 @@
 @prefix exo: <http://example.org/#>.
 @prefix dbp: <http://dbpedia.org/ontology/#>.
-@prefix wd: <http://www.wikidata.org/entity/#>.
 
 exo:rock a exo:genre;
   exo:id "rock";
@@ -8,18 +7,20 @@ exo:rock a exo:genre;
   exo:artists (exo:The_Beatles exo:David_Bowie).
 
 exo:The_Beatles a dbp:artist;
+  exo:id "The_Beatles";
   exo:name "The Beatles";
-  wd:artitsId "Q1299";
-  wd:awardId "P166";
-  wd:citizenshipId "P27";
-  wd:originId "P495".
+  exo:artistsId "Q1299";
+  exo:awardId "P166";
+  exo:from "P495";
+  exo:genre exo:rock .
 
 exo:David_Bowie a dbp:artist;
+  exo:id "David_Bowie";
   exo:name "David Bowie";
-  wd:artitsId "Q5383";
-  wd:awardId "P166";
-  wd:citizenshipId "P27";
-  wd:originId "P495".
+  exo:artistsId "Q5383";
+  exo:awardId "P166";
+  exo:from "P27";
+  exo:genre exo:rock .
 
 
 exo:alternative a exo:genre;
@@ -28,18 +29,20 @@ exo:alternative a exo:genre;
   exo:artists (exo:Green_Day exo:Linkin_Park).
 
 exo:Green_Day a dbp:artist;
+  exo:id "Green_Day";
   exo:name "Green Day";
-  wd:artitsId "Q47871";
-  wd:awardId "P166";
-  wd:citizenshipId "P27";
-  wd:originId "P495".
+  exo:artistsId "Q47871";
+  exo:awardId "P166";
+  exo:from "P495";
+  exo:genre exo:alternative .
 
 exo:Linkin_Park a dbp:artist;
+  exo:id "Linkin_Park";
   exo:name "Linkin Park";
-  wd:artitsId "Q261";
-  wd:awardId "P166";
-  wd:citizenshipId "P27";
-  wd:originId "P495".
+  exo:artistsId "Q261";
+  exo:awardId "P166";
+  exo:from "P495";
+  exo:genre exo:alternative .
 
 
 exo:pop a exo:genre;
@@ -48,18 +51,20 @@ exo:pop a exo:genre;
   exo:artists (exo:Ed_Sheeran exo:Katy_Perry).
 
 exo:Ed_Sheeran a dbp:artist;
+  exo:id "Ed_Sheeran";
   exo:name "Ed Sheeran";
-  wd:artitsId "Q47447";
-  wd:awardId "P166";
-  wd:citizenshipId "P27";
-  wd:originId "P495".
+  exo:artistsId "Q47447";
+  exo:awardId "P166";
+  exo:from "P27";
+  exo:genre exo:pop .
 
 exo:Katy_Perry a dbp:artist;
+  exo:id "Katy_Perry";
   exo:name "Katy Perry";
-  wd:artitsId "Q42493";
-  wd:awardId "P166";
-  wd:citizenshipId "P27";
-  wd:originId "P495".
+  exo:artistsId "Q42493";
+  exo:awardId "P166";
+  exo:from "P27";
+  exo:genre exo:pop .
 
 
 exo:rap a exo:genre;
@@ -68,18 +73,20 @@ exo:rap a exo:genre;
   exo:artists (exo:Eminem exo:Snoop_Dogg).
 
 exo:Eminem a dbp:artist;
+  exo:id "Eminem";
   exo:name "Eminem";
-  wd:artitsId "Q5608";
-  wd:awardId "P166";
-  wd:citizenshipId "P27";
-  wd:originId "P495".
+  exo:artistsId "Q5608";
+  exo:awardId "P166";
+  exo:from "P27";
+  exo:genre exo:rap .
 
 exo:Snoop_Dogg a dbp:artist;
+  exo:id "Snoop_Dogg";
   exo:name "Snoop Dogg";
-  wd:artitsId "Q6096";
-  wd:awardId "P166";
-  wd:citizenshipId "P27";
-  wd:originId "P495".
+  exo:artistsId "Q6096";
+  exo:awardId "P166";
+  exo:from "P27";
+  exo:genre exo:rap .
 
 
 exo:all a exo:genre;

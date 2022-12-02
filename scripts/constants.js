@@ -55,12 +55,12 @@ const getRandomSongFromArtistDbpedia = async (artist_name) => {
         return `'${songname.values[0]}'`
 }
 
-const getPropertyDataWikidata = async (artist_name, property) => {
+const getPropertyDataWikidata = async (artist_name, propertyId) => {
     let result = {
-        property: property,
+        property: propertyId,
         values: []
     }
-    const query = `SELECT ?object  WHERE { wd:${WikidataIds[artist_name]} wdt:${WikidataIds[property]} ?object . }`
+    const query = `SELECT ?object  WHERE { wd:${artist_name} wdt:${propertyId} ?object . }`
         const client = new ParsingClient({ 
             endpointUrl: ENDPOINT_URL_WIKIDATA,  
             headers: {
@@ -101,10 +101,10 @@ const getCountyNameWikidata = async (entity_id) => {
 
 const activeQuestion = {
     question: "When was *artist* active?",
-    getCorrectAnswer: async (artist_name) => {
-        const activeYearStart = await getPropertyDataDbpedia(artist_name, "dbo:activeYearsStartYear")
-        const activeYearEnd = await getPropertyDataDbpedia(artist_name, "dbo:activeYearsEndYear")
-        const activeYears = await getPropertyDataDbpedia(artist_name, "dbp:yearsActive")
+    getCorrectAnswer: async (artist) => {
+        const activeYearStart = await getPropertyDataDbpedia(artist.id, "dbo:activeYearsStartYear")
+        const activeYearEnd = await getPropertyDataDbpedia(artist.id, "dbo:activeYearsEndYear")
+        const activeYears = await getPropertyDataDbpedia(artist.id, "dbp:yearsActive")
         if (activeYearEnd.values.length == 0) {
             if (activeYearStart.values.length == 0) {
                 return `From ${activeYears.values[0]} until Now`
@@ -118,9 +118,9 @@ const activeQuestion = {
         let artists_done = [current_artist]
         for (let i = 0; i < 3;) {
             const random_artist = helpers.getRandomArtistExceptDone(artists_done)
-            const activeYearStart = await getPropertyDataDbpedia(random_artist, "dbo:activeYearsStartYear")
-            const activeYearEnd = await getPropertyDataDbpedia(random_artist, "dbo:activeYearsEndYear")
-            const activeYears = await getPropertyDataDbpedia(current_artist, "dbp:yearsActive")
+            const activeYearStart = await getPropertyDataDbpedia(random_artist.id, "dbo:activeYearsStartYear")
+            const activeYearEnd = await getPropertyDataDbpedia(random_artist.id, "dbo:activeYearsEndYear")
+            const activeYears = await getPropertyDataDbpedia(current_artist.id, "dbp:yearsActive")
             let str = ""
             if (activeYearEnd.values.length == 0) {
                 if (activeYearStart.values.length == 0) {
@@ -142,16 +142,16 @@ const activeQuestion = {
 }
 const archivementsQuestion = {
     question: "How many awards did *artist* win?",
-    getCorrectAnswer: async (artist_name) => {
-        const award_ids = await getPropertyDataWikidata(artist_name, "award received")
+    getCorrectAnswer: async (artist) => {
+        const award_ids = await getPropertyDataWikidata(artist.artistId, artist.awardId)
         return `${award_ids.values.length}`
     },
     getWrongAnswers: async (current_artist, correct_answer) => {
         let possible_answers = []
         let artists_done = [current_artist]
         for (let i = 0; i < 3;) {
-            const random_artist = getRandomArtistExceptDone(artists_done)
-            const award_ids = await getPropertyDataWikidata(random_artist, "award received")
+            const random_artist = helpers.getRandomArtistExceptDone(artists_done)
+            const award_ids = await getPropertyDataWikidata(random_artist.artistId, random_artist.awardId)
             const str = `${award_ids.values.length}`
             if (possible_answers.includes(str) || correct_answer == str) {
                 continue
@@ -165,11 +165,8 @@ const archivementsQuestion = {
 }
 const fromQuestion = {
     question: "Where is *artist* from?",
-    getCorrectAnswer: async (artist_name) => {
-        let entity_link = await getPropertyDataWikidata(artist_name, "country of citizenship")
-        if (entity_link.values.length == 0) {
-            entity_link = await getPropertyDataWikidata(artist_name, "country of origin")
-        }
+    getCorrectAnswer: async (artist) => {
+        let entity_link = await getPropertyDataWikidata(artist.artistId, artist.from)
         const parts = entity_link.values[0].split('/')
         const entity_id = parts[parts.length - 1]
         const countries = await getCountyNameWikidata(entity_id)
@@ -184,16 +181,16 @@ const fromQuestion = {
 }
 const songQuestion =  {
     question: "Which song did *artist* create?",
-    getCorrectAnswer: async (artist_name) => {
-        const songname = await getRandomSongFromArtistDbpedia(artist_name)
+    getCorrectAnswer: async (artist) => {
+        const songname = await getRandomSongFromArtistDbpedia(artist.id)
         return `${songname}`
     },
     getWrongAnswers: async (current_artist, correct_answer) => {
         let possible_answers = []
         let artists_done = [current_artist]
         for (let i = 0; i < 3;) {
-            const random_artist = getRandomArtistExceptDone(artists_done)
-            const songname = await getRandomSongFromArtistDbpedia(random_artist)
+            const random_artist = helpers.getRandomArtistExceptDone(artists_done)
+            const songname = await getRandomSongFromArtistDbpedia(random_artist.id)
             const str = `${songname}`
             if (songname == undefined) {
                 console.log(random_artist)
