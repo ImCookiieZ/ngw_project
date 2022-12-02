@@ -1,55 +1,55 @@
 {
   "answers": [
     [
+      "'Lucky You'",
+      "'Wake Me Up When September Ends'",
+      "'All of the Stars'",
+      "'I Want to Tell You'"
+    ],
+    [
+      "United States",
+      "Germany",
       "Spain",
-      "United Kingdom of Great Britain and Northern Ireland",
-      "Mexico",
-      "United Kingdom"
-    ],
-    [
-      "1",
-      "13",
-      "7",
-      "12"
-    ],
-    [
-      "Spain",
-      "Mexico",
-      "United Kingdom",
-      "United Kingdom of Great Britain and Northern Ireland"
-    ],
-    [
-      "'Lighters Up'",
-      "'3'",
-      "'Crying, Waiting, Hoping'",
-      "'Save as Draft'"
+      "Mexico"
     ],
     [
       "United States",
       "Spain",
       "Mexico",
       "United Kingdom"
+    ],
+    [
+      "From 1988 until Now",
+      "From 1962 until 2016",
+      "From 2004 until Now",
+      "From 1992 until Now"
+    ],
+    [
+      "'She's a Woman'",
+      "'Undercova Funk'",
+      "'Like Toy Soldiers'",
+      "'I've Been Waiting for You'"
     ]
   ],
   "questions": [
-    "Where is The Beatles from?",
-    "How many awards had Snoop Dogg got?",
-    "Where is Ed Sheeran from?",
-    "Which song did Katy Perry create?",
-    "Where is Snoop Dogg from?"
+    "Which song did Eminem create?",
+    "Where is Linkin Park from?",
+    "Where is Katy Perry from?",
+    "When was David Bowie active?",
+    "Which song did The Beatles create?"
   ],
   "expected": [
+    0,
+    0,
+    0,
     1,
-    2,
-    3,
-    3,
     0
   ],
   "responses": [
-    1,
-    0,
     3,
-    1,
-    2
+    0,
+    null,
+    2,
+    3
   ]
 }

@@ -1,0 +1,88 @@
+@prefix exo: <http://example.org/#>.
+@prefix dbp: <http://dbpedia.org/ontology/#>.
+@prefix wd: <http://www.wikidata.org/entity/#>.
+
+exo:rock a exo:genre;
+  exo:id "rock";
+  exo:name "Rock Lover";
+  exo:artists (exo:The_Beatles exo:David_Bowie).
+
+exo:The_Beatles a dbp:artist;
+  exo:name "The Beatles";
+  wd:artitsId "Q1299";
+  wd:awardId "P166";
+  wd:citizenshipId "P27";
+  wd:originId "P495".
+
+exo:David_Bowie a dbp:artist;
+  exo:name "David Bowie";
+  wd:artitsId "Q5383";
+  wd:awardId "P166";
+  wd:citizenshipId "P27";
+  wd:originId "P495".
+
+
+exo:alternative a exo:genre;
+  exo:id "alternative";
+  exo:name "Alternative Addict";
+  exo:artists (exo:Green_Day exo:Linkin_Park).
+
+exo:Green_Day a dbp:artist;
+  exo:name "Green Day";
+  wd:artitsId "Q47871";
+  wd:awardId "P166";
+  wd:citizenshipId "P27";
+  wd:originId "P495".
+
+exo:Linkin_Park a dbp:artist;
+  exo:name "Linkin Park";
+  wd:artitsId "Q261";
+  wd:awardId "P166";
+  wd:citizenshipId "P27";
+  wd:originId "P495".
+
+
+exo:pop a exo:genre;
+  exo:id "pop";
+  exo:name "Pop Enthusiast";
+  exo:artists (exo:Ed_Sheeran exo:Katy_Perry).
+
+exo:Ed_Sheeran a dbp:artist;
+  exo:name "Ed Sheeran";
+  wd:artitsId "Q47447";
+  wd:awardId "P166";
+  wd:citizenshipId "P27";
+  wd:originId "P495".
+
+exo:Katy_Perry a dbp:artist;
+  exo:name "Katy Perry";
+  wd:artitsId "Q42493";
+  wd:awardId "P166";
+  wd:citizenshipId "P27";
+  wd:originId "P495".
+
+
+exo:rap a exo:genre;
+  exo:id "rap";
+  exo:name "Rap Admirer";
+  exo:artists (exo:Eminem exo:Snoop_Dogg).
+
+exo:Eminem a dbp:artist;
+  exo:name "Eminem";
+  wd:artitsId "Q5608";
+  wd:awardId "P166";
+  wd:citizenshipId "P27";
+  wd:originId "P495".
+
+exo:Snoop_Dogg a dbp:artist;
+  exo:name "Snoop_Dogg";
+  wd:artitsId "Q6096";
+  wd:awardId "P166";
+  wd:citizenshipId "P27";
+  wd:originId "P495".
+
+
+exo:all a exo:genre;
+  exo:id "all";
+  exo:name "Know-it-all";
+  exo:artists (exo:The_Beatles exo:David_Bowie exo:Eminem exo:Snoop_Dogg exo:Green_Day exo:Linkin_Park exo:Ed_Sheeran exo:Katy_Perry).

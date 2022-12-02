@@ -1,7 +1,31 @@
 import fs from "fs";
-import { ARTISTS, STANDARD_BACKGROUND, STANDARD_BORDER, QUESTIONS, STANDARD_TEXT } from "./constants.js";
+import { STANDARD_BACKGROUND, STANDARD_BORDER, QUESTIONS, STANDARD_TEXT } from "./constants.js";
+import $rdf from "rdflib";
 
-export const getRandomArtistExceptDone = (artists_done) => {
+const gameString = fs.readFileSync("./storage/resources.ttl").toString();
+const gameStore = $rdf.graph();
+$rdf.parse(gameString, gameStore, "http://example.org", "text/turtle");
+
+const queryAllUsers = () => {
+    const gameStringQuery = `
+        SELECT
+            ?name ?genre ?id
+        WHERE {
+            ?genre a <http://example.org/#genre> .
+            ?genre <http://example.org/#name> ?name .
+            ?genre <http://example.org/#id> ?id .
+        }
+    `;
+    const gameQuery = $rdf.SPARQLToQuery(gameStringQuery, false, gameStore);
+    return(
+        gameStore.querySync(gameQuery).map((result) => {
+            return {name: result["?name"].value, id: result["?id"].value};
+        })
+    )
+}
+
+
+const getRandomArtistExceptDone = (artists_done) => {
     let tmp_artist = ARTISTS.all.slice()
 
     for (let i = artists_done.length -1; i >= 0; i--) {
@@ -21,18 +45,11 @@ const getRandomQuestions = async (username) => {
     let result_expected = []
 
     for (let i = 0; i < 5;) {
-        let artist
-        if (username.includes("Rock")) {
-            artist = getRandomFromList(ARTISTS.rock)
-        } else if (username.includes("Rap")) {
-            artist = getRandomFromList(ARTISTS.rap)
-        } else if (username.includes("Alternative")) {
-            artist = getRandomFromList(ARTISTS.alternative)
-        } else if (username.includes("Pop")) {
-            artist = getRandomFromList(ARTISTS.pop)
-        } else if (username.includes("All")) {
-            artist = getRandomFromList(ARTISTS.all)
-        }
+        const users = queryArtistsFromUsers(username)
+        let artist = getRandomFromList(users)
+        console.log(username)
+        console.log(artist)
+        console.log(users)
         let tmp_question_data = getRandomFromList(QUESTIONS)
         let tmp_question = tmp_question_data.question.replace("*artist*", artist.replace("_", " "))
         
@@ -104,4 +121,22 @@ const create_question_data = (userData) => {
     return quests;
 }  
 
-export default {createQuestions, create_question_data, getRandomQuestions}
+const queryArtistsFromUsers = (user) => {
+    const gameStringQuery = `
+        SELECT
+            ?name
+        WHERE {
+            ?artist a <http://dbpedia.org/ontology/#artist> .
+            ?artist <http://example.org/#name> ?name .
+        }
+    `;
+    const gameQuery = $rdf.SPARQLToQuery(gameStringQuery, false, gameStore);
+    
+    return(
+        gameStore.querySync(gameQuery).map((result) => {
+            return result["?name"].value;
+        })
+    )
+}
+
+export default {createQuestions, create_question_data, getRandomQuestions, queryAllUsers, getRandomArtistExceptDone, queryArtistsFromUsers}

@@ -1,5 +1,5 @@
 import ParsingClient from "sparql-http-client/ParsingClient.js";
-import { getRandomArtistExceptDone } from "./helpers.js";
+import helpers from "./helpers.js";
 
 
 export const STANDARD_BORDER = "black"
@@ -27,30 +27,6 @@ const getPropertyDataDbpedia = async (resource, property) => {
         })
     )
     return result
-}
-export const ARTISTS = {
-    rock: ["The_Beatles", "David_Bowie"],
-    alternative: ["Green_Day", "Linkin_Park"],
-    pop: ["Ed_Sheeran", "Katy_Perry"],
-    rap: ["Eminem", "Snoop_Dogg"],
-    all: ["The_Beatles", "Ed_Sheeran", "Katy_Perry", "David_Bowie", "Green_Day", "Linkin_Park", "Eminem", "Snoop_Dogg"]
-}
-
-const WikidataIds = {
-    //artists
-    "The_Beatles" : "Q1299",
-    "David_Bowie" : "Q5383",
-    "Green_Day" : "Q47871",
-    "Linkin_Park" : "Q261",
-    "Ed_Sheeran" : "Q47447",
-    "Katy_Perry" : "Q42493",
-    "Eminem" : "Q5608",
-    "Snoop_Dogg": "Q6096",
-    //properties
-    "award received" : "P166",
-    "country of citizenship" : "P27",
-    "country of origin" : "P495"
-
 }
 
 const getRandomSongFromArtistDbpedia = async (artist_name) => {
@@ -141,7 +117,7 @@ const activeQuestion = {
         let possible_answers = []
         let artists_done = [current_artist]
         for (let i = 0; i < 3;) {
-            const random_artist = getRandomArtistExceptDone(artists_done)
+            const random_artist = helpers.getRandomArtistExceptDone(artists_done)
             const activeYearStart = await getPropertyDataDbpedia(random_artist, "dbo:activeYearsStartYear")
             const activeYearEnd = await getPropertyDataDbpedia(random_artist, "dbo:activeYearsEndYear")
             const activeYears = await getPropertyDataDbpedia(current_artist, "dbp:yearsActive")

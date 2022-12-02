@@ -1,6 +1,6 @@
 import express from "express";
 import handlebars from "express-handlebars";
-import helpers from "./helpers.js";
+import helpers from "./scripts/helpers.js";
 import fs from "fs";
 
 const app = express();
@@ -23,7 +23,13 @@ app.use(express.static('public'))
 app.listen(port, () => console.log(`App listening to port ${port}`));
 
 app.get('/', (req, res) => {
-    res.render('chooseAUser', {layout: "start"});
+  const users = helpers.queryAllUsers()
+  const data = {
+    layout: "start",
+    users: users
+  }
+  console.log(JSON.stringify(data))
+    res.render('chooseAUser', data);
 });
 
 app.get('/question', async (req, res) => {
