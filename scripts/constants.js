@@ -174,7 +174,11 @@ const fromQuestion = {
     },
     getWrongAnswers: async (_, correct_answer) => {
         let li = ["Germany", "Spain", "Mexico", "United Kingdom", "United States of America"]
-        li.splice(li.indexOf(correct_answer), 1);
+        for (let i = 0; i  < li.length; i++) {
+            if (correct_answer.includes(li[i])) {
+                li.splice(i, 1)
+            }
+        }
         li.splice(Math.floor(Math.random() * li.length), 1);
         return li
     }
