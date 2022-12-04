@@ -8,25 +8,28 @@ $rdf.parse(gameString, store, "http://example.org", "text/turtle");
 
 const queryAllUsers = () => {
     const queryString = `
+        prefix exo: <http://example.org/#>
+        prefix dbp: <http://dbpedia.org/ontology/#>
         SELECT
-            ?name ?genre ?id
+            ?name ?id
         WHERE {
-            ?genre a <http://example.org/#genre> .
-            ?genre <http://example.org/#name> ?name .
-            ?genre <http://example.org/#id> ?id .
+            ?user a exo:user .
+            ?user exo:name ?name .
+            ?user exo:favorite_genre ?genre .
+            ?genre exo:id ?id .
         }
     `;
     const gameQuery = $rdf.SPARQLToQuery(queryString, false, store);
     return(
         store.querySync(gameQuery).map((result) => {
-            return {name: result["?name"].value, id: result["?id"].value};
+            return {name: result["?name"].value, favorite_genre_id: result["?id"].value};
         })
     )
 }
 
 
 const getRandomArtistExceptDone = (artists_done) => {
-    let tmp_artist = queryArtistsFromUsers("all")
+    let tmp_artist = queryArtistsFromFavoriteGenre("all")
 
     for (let i = artists_done.length -1; i >= 0; i--) {
         tmp_artist.splice(tmp_artist.indexOf(artists_done[i]), 1);
@@ -45,7 +48,7 @@ const getRandomQuestions = async (username) => {
     let result_expected = []
 
     for (let i = 0; i < 5;) {
-        const users = queryArtistsFromUsers(username)
+        const users = queryArtistsFromFavoriteGenre(username)
         let artist = getRandomFromList(users)
         let tmp_question_data = getRandomFromList(QUESTIONS)
         let tmp_question = tmp_question_data.question.replace("*artist*", artist.name)
@@ -121,18 +124,20 @@ const create_question_data = (userData) => {
     return quests;
 }  
 
-const queryArtistsFromUsers = (user) => {
+const queryArtistsFromFavoriteGenre = (favorite_genre) => {
     const queryString = `
+        prefix exo: <http://example.org/#>
+        prefix dbp: <http://dbpedia.org/ontology/#>
         SELECT
             ?name ?artistsId ?awardId ?from ?originId ?id
         WHERE {
             ?artist a <http://dbpedia.org/ontology/#artist> .
-            ?artist <http://example.org/#artistsId> ?artistsId .
-            ?artist <http://example.org/#awardId> ?awardId .
-            ?artist <http://example.org/#from> ?from .
-            ?artist <http://example.org/#name> ?name .
-            ?artist <http://example.org/#id> ?id .
-            ${user == "all" ? "" : `?artist <http://example.org/#genre> <http://example.org/#${user}> .`}
+            ?artist exo:artistsId ?artistsId .
+            ?artist exo:awardId ?awardId .
+            ?artist exo:from ?from .
+            ?artist exo:name ?name .
+            ?artist exo:id ?id .
+            ${favorite_genre == "all" ? "" : `?artist exo:genre exo:${favorite_genre} .`}
         }
     `;
     const gameQuery = $rdf.SPARQLToQuery(queryString, false, store);
@@ -149,4 +154,4 @@ const queryArtistsFromUsers = (user) => {
     )
 }
 
-export default {createQuestions, create_question_data, getRandomQuestions, queryAllUsers, getRandomArtistExceptDone, queryArtistsFromUsers}
+export default {createQuestions, create_question_data, getRandomQuestions, queryAllUsers, getRandomArtistExceptDone, queryArtistsFromUsers: queryArtistsFromFavoriteGenre}

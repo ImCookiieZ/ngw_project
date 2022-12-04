@@ -1,12 +1,10 @@
 @prefix exo: <http://example.org/#>.
 @prefix dbp: <http://dbpedia.org/ontology/#>.
 
-exo:rock a dbp:genre;
-  exo:id "rock" .
-
-exo:rock_lover a exo:user;
+exo:rock a exo:genre;
+  exo:id "rock";
   exo:name "Rock Lover";
-  exo:favorite_genre exo:rock .
+  exo:artists (exo:The_Beatles exo:David_Bowie).
 
 exo:The_Beatles a dbp:artist;
   exo:id "The_Beatles";
@@ -25,12 +23,10 @@ exo:David_Bowie a dbp:artist;
   exo:genre exo:rock .
 
 
-exo:alternative a dbp:genre;
-  exo:id "alternative" .
-
-exo:alternative_addict a exo:user;
+exo:alternative a exo:genre;
+  exo:id "alternative";
   exo:name "Alternative Addict";
-  exo:favorite_genre exo:alternative .
+  exo:artists (exo:Green_Day exo:Linkin_Park).
 
 exo:Green_Day a dbp:artist;
   exo:id "Green_Day";
@@ -49,12 +45,10 @@ exo:Linkin_Park a dbp:artist;
   exo:genre exo:alternative .
 
 
-exo:pop a dbp:genre;
-  exo:id "pop" .
-
-exo:pop_enthusiast a exo:user;
+exo:pop a exo:genre;
+  exo:id "pop";
   exo:name "Pop Enthusiast";
-  exo:favorite_genre exo:pop .
+  exo:artists (exo:Ed_Sheeran exo:Katy_Perry).
 
 exo:Ed_Sheeran a dbp:artist;
   exo:id "Ed_Sheeran";
@@ -73,13 +67,10 @@ exo:Katy_Perry a dbp:artist;
   exo:genre exo:pop .
 
 
-exo:rap a dbp:genre;
-  exo:id "rap" .
-
-exo:rap_admirer a exo:user;
+exo:rap a exo:genre;
+  exo:id "rap";
   exo:name "Rap Admirer";
-  exo:favorite_genre exo:rap .
-
+  exo:artists (exo:Eminem exo:Snoop_Dogg).
 
 exo:Eminem a dbp:artist;
   exo:id "Eminem";
@@ -97,9 +88,8 @@ exo:Snoop_Dogg a dbp:artist;
   exo:from "P27";
   exo:genre exo:rap .
 
-exo:all a dbp:genre;
-  exo:id "all" .
 
-exo:know_all a exo:user;
+exo:all a exo:genre;
+  exo:id "all";
   exo:name "Know-it-all";
-  exo:favorite_genre exo:all .
+  exo:artists (exo:The_Beatles exo:David_Bowie exo:Eminem exo:Snoop_Dogg exo:Green_Day exo:Linkin_Park exo:Ed_Sheeran exo:Katy_Perry).

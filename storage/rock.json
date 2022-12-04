@@ -1,55 +1,55 @@
 {
   "answers": [
     [
-      "'The Inner Light'",
-      "'DJ'",
-      "'Michelle'",
-      "'The Next Day'"
-    ],
-    [
-      "United Kingdom of Great Britain and Northern Ireland",
-      "Germany",
-      "Mexico",
-      "United States of America"
-    ],
-    [
-      "Germany",
-      "United Kingdom of Great Britain and Northern Ireland",
-      "Spain",
-      "United States of America"
+      "'Swish Swish'",
+      "'Faint'",
+      "'Sgt. Pepper's Lonely Hearts Club Band (Reprise)'",
+      "'I Got to Find My Baby'"
     ],
     [
       "1",
+      "12",
       "11",
-      "8",
       "13"
     ],
     [
-      "From 1960 until 1970",
+      "'Without Me'",
+      "'Peru'",
+      "'Unwashed and Somewhat Slightly Dazed'",
+      "'You Know My Name'"
+    ],
+    [
       "From 1960 until Now",
+      "From 1960 until 1970",
       "From 2004 until Now",
       "From 1962 until 2016"
+    ],
+    [
+      "Germany",
+      "Mexico",
+      "United States of America",
+      "United Kingdom of Great Britain and Northern Ireland"
     ]
   ],
   "questions": [
     "Which song did The Beatles create?",
-    "Where is The Beatles from?",
-    "Where is David Bowie from?",
     "How many awards did David Bowie win?",
-    "When was The Beatles active?"
+    "Which song did David Bowie create?",
+    "When was The Beatles active?",
+    "Where is The Beatles from?"
   ],
   "expected": [
-    0,
-    0,
-    1,
+    2,
     3,
-    0
+    2,
+    1,
+    3
   ],
   "responses": [
     1,
     0,
-    1,
-    0,
-    3
+    3,
+    2,
+    1
   ]
 }
