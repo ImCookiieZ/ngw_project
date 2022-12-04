@@ -72,6 +72,10 @@ app.get('/result', (req, res) => {
   fs.writeFileSync(`storage/${username}.json`, file)
 
   const quests = helpers.create_question_data(userData);
+  let correct = 0
+  for (let question of quests) {
+    correct += question.correct
+  }
   const data = {
     username: username, 
     quest_1: quests[0],
@@ -79,6 +83,7 @@ app.get('/result', (req, res) => {
     quest_3: quests[2],
     quest_4: quests[3],
     quest_5: quests[4],
+    correctAnswers: correct
   }
   res.render('result', data)
 });

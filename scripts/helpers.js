@@ -92,26 +92,29 @@ const create_question_data = (userData) => {
     let tmp_quests = []
 
     for (let j = 0; j < 5; j++) {
+        let correct = 0
         for (let i = 0; i < 4; i++) {
-        let border_color = STANDARD_BORDER;
-        let background_color = STANDARD_BACKGROUND;
-        let text_color = STANDARD_TEXT;
-        if (i == userData.expected[j]) {
-            border_color = "green";
-            if (userData.responses[j] == i) {
-            background_color = "green";
-            border_color = STANDARD_BORDER;
-            } else
-            text_color = "green";
-        } else if (i == userData.responses[j]) {
-            background_color = "red";
-        }
-    tmp_quests.push(`style="border-width: 3px; border-color: ${border_color}; background-color: ${background_color}; color: ${text_color};"`);
+            let border_color = STANDARD_BORDER;
+            let background_color = STANDARD_BACKGROUND;
+            let text_color = STANDARD_TEXT;
+            if (i == userData.expected[j]) {
+                border_color = "green";
+                if (userData.responses[j] == i) {
+                background_color = "green";
+                border_color = STANDARD_BORDER;
+                correct = 1
+                } else
+                text_color = "green";
+            } else if (i == userData.responses[j]) {
+                background_color = "red";
+            }
+            tmp_quests.push(`style="border-width: 3px; border-color: ${border_color}; background-color: ${background_color}; color: ${text_color};"`);
         }
         quests.push({
-        colors: tmp_quests,
-        question: userData.questions[j],
-        answers: userData.answers[j]
+            colors: tmp_quests,
+            question: userData.questions[j],
+            answers: userData.answers[j],
+            correct: correct 
         });
         tmp_quests = [];
     }
