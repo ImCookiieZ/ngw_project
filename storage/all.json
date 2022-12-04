@@ -1,55 +1,55 @@
 {
   "answers": [
     [
-      "Germany",
-      "United States",
-      "Mexico",
-      "United Kingdom"
+      "'Longview'",
+      "'China Girl'",
+      "'Rebellion'",
+      "'Changes'"
     ],
     [
-      "United Kingdom of Great Britain and Northern Ireland",
-      "Germany",
-      "Mexico",
-      "United Kingdom"
+      "'Role Model'",
+      "'One Day at a Time'",
+      "'Scream Like a Baby'",
+      "'The Simpsons Theme'"
     ],
     [
-      "'Invisible'",
-      "'Platinum'",
-      "'I'll Be Gone'",
-      "'And I Love Her'"
+      "'The Simpsons Theme'",
+      "'Welcome to Paradise'",
+      "'One Step Closer'",
+      "'Sing'"
     ],
     [
-      "'Pallas Athena'",
-      "'Burn It Down'",
-      "'undefined'",
-      "'Bloodstream'"
+      "'21'",
+      "'Miracle Goodnight'",
+      "'All of the Stars'",
+      "'Wake Me Up When September Ends'"
     ],
     [
-      "From 2004 until Now",
-      "From 1962 until 2016",
-      "From 1992 until Now",
-      "From 1960 until 1970"
+      "'Waiting'",
+      "'The One That Got Away'",
+      "'Suffragette City'",
+      "'Holiday'"
     ]
   ],
   "questions": [
-    "Where is Green Day from?",
-    "Where is David Bowie from?",
-    "Which song did Snoop Dogg create?",
+    "Which song did David Bowie create?",
     "Which song did Eminem create?",
-    "When was Snoop Dogg active?"
+    "Which song did Linkin Park create?",
+    "Which song did Ed Sheeran create?",
+    "Which song did Green Day create?"
   ],
   "expected": [
     1,
-    0,
     1,
     2,
-    2
+    2,
+    3
   ],
   "responses": [
-    1,
-    0,
-    1,
     3,
-    2
+    2,
+    3,
+    2,
+    3
   ]
 }

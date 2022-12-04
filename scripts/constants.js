@@ -52,6 +52,11 @@ const getRandomSongFromArtistDbpedia = async (artist_name) => {
         if (songname.values.length == 0) {
             songname = await getPropertyDataDbpedia(link_songname, "foaf:name")
         }
+        if (songname.values.length == 0) {
+            console.log(link_songname)
+            console.log(artist_name)
+            return await getRandomSongFromArtistDbpedia(artist_name)
+        }
         return `'${songname.values[0]}'`
 }
 
@@ -187,6 +192,9 @@ const songQuestion =  {
     question: "Which song did *artist* create?",
     getCorrectAnswer: async (artist) => {
         const songname = await getRandomSongFromArtistDbpedia(artist.id)
+        if (songname == "'undefined'") {
+            console.log(random_artist)
+        }
         return `${songname}`
     },
     getWrongAnswers: async (current_artist, correct_answer) => {
@@ -196,7 +204,7 @@ const songQuestion =  {
             const random_artist = helpers.getRandomArtistExceptDone(artists_done)
             const songname = await getRandomSongFromArtistDbpedia(random_artist.id)
             const str = `${songname}`
-            if (songname == undefined) {
+            if (songname == "'undefined'") {
                 console.log(random_artist)
             }
             if (possible_answers.includes(str) || correct_answer == str) {
@@ -210,3 +218,4 @@ const songQuestion =  {
     }
 }
 export const QUESTIONS = [activeQuestion, archivementsQuestion, fromQuestion, songQuestion]
+// export const QUESTIONS = [songQuestion]
