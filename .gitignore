@@ -1,2 +1,7 @@
 node_modules
 package-lock.json
+storage/all.json
+storage/alternative.json
+storage/pop.json
+storage/rap.json
+storage/rock.json

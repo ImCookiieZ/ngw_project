@@ -125,7 +125,7 @@ const activeQuestion = {
             const random_artist = helpers.getRandomArtistExceptDone(artists_done)
             const activeYearStart = await getPropertyDataDbpedia(random_artist.id, "dbo:activeYearsStartYear")
             const activeYearEnd = await getPropertyDataDbpedia(random_artist.id, "dbo:activeYearsEndYear")
-            const activeYears = await getPropertyDataDbpedia(current_artist.id, "dbp:yearsActive")
+            const activeYears = await getPropertyDataDbpedia(random_artist.id, "dbp:yearsActive")
             let str = ""
             if (activeYearEnd.values.length == 0) {
                 if (activeYearStart.values.length == 0) {
@@ -134,11 +134,11 @@ const activeQuestion = {
                 else str = `From ${activeYearStart.values[0]} until Now`
             }
             else str = `From ${activeYearStart.values[0]} until ${activeYearEnd.values[0]}`
+            artists_done.push(random_artist)
             if (possible_answers.includes(str) || correct_answer == str) {
                 continue
             }
             possible_answers.push(str)
-            artists_done.push(random_artist)
             i++
         }
         return possible_answers
