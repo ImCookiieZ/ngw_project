@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:ns0="http://example.org/#">
+
+  <rdf:Description rdf:about="http://example.org/#rock">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/#genre"/>
+    <ns0:id>rock</ns0:id>
+  </rdf:Description>
+
+  <ns0:user rdf:about="http://example.org/#rock_lover">
+    <ns0:name>Rock Lover</ns0:name>
+    <ns0:favorite_genre rdf:resource="http://example.org/#rock"/>
+  </ns0:user>
+
+  <rdf:Description rdf:about="http://example.org/#The_Beatles">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/#artist"/>
+    <ns0:id>The_Beatles</ns0:id>
+    <ns0:name>The Beatles</ns0:name>
+    <ns0:artistsId>Q1299</ns0:artistsId>
+    <ns0:awardId>P166</ns0:awardId>
+    <ns0:from>P495</ns0:from>
+    <ns0:genre rdf:resource="http://example.org/#rock"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://example.org/#David_Bowie">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/#artist"/>
+    <ns0:id>David_Bowie</ns0:id>
+    <ns0:name>David Bowie</ns0:name>
+    <ns0:artistsId>Q5383</ns0:artistsId>
+    <ns0:awardId>P166</ns0:awardId>
+    <ns0:from>P27</ns0:from>
+    <ns0:genre rdf:resource="http://example.org/#rock"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://example.org/#alternative">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/#genre"/>
+    <ns0:id>alternative</ns0:id>
+  </rdf:Description>
+
+  <ns0:user rdf:about="http://example.org/#alternative_addict">
+    <ns0:name>Alternative Addict</ns0:name>
+    <ns0:favorite_genre rdf:resource="http://example.org/#alternative"/>
+  </ns0:user>
+
+  <rdf:Description rdf:about="http://example.org/#Green_Day">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/#artist"/>
+    <ns0:id>Green_Day</ns0:id>
+    <ns0:name>Green Day</ns0:name>
+    <ns0:artistsId>Q47871</ns0:artistsId>
+    <ns0:awardId>P166</ns0:awardId>
+    <ns0:from>P495</ns0:from>
+    <ns0:genre rdf:resource="http://example.org/#alternative"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://example.org/#Linkin_Park">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/#artist"/>
+    <ns0:id>Linkin_Park</ns0:id>
+    <ns0:name>Linkin Park</ns0:name>
+    <ns0:artistsId>Q261</ns0:artistsId>
+    <ns0:awardId>P166</ns0:awardId>
+    <ns0:from>P495</ns0:from>
+    <ns0:genre rdf:resource="http://example.org/#alternative"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://example.org/#pop">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/#genre"/>
+    <ns0:id>pop</ns0:id>
+  </rdf:Description>
+
+  <ns0:user rdf:about="http://example.org/#pop_enthusiast">
+    <ns0:name>Pop Enthusiast</ns0:name>
+    <ns0:favorite_genre rdf:resource="http://example.org/#pop"/>
+  </ns0:user>
+
+  <rdf:Description rdf:about="http://example.org/#Ed_Sheeran">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/#artist"/>
+    <ns0:id>Ed_Sheeran</ns0:id>
+    <ns0:name>Ed Sheeran</ns0:name>
+    <ns0:artistsId>Q47447</ns0:artistsId>
+    <ns0:awardId>P166</ns0:awardId>
+    <ns0:from>P27</ns0:from>
+    <ns0:genre rdf:resource="http://example.org/#pop"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://example.org/#Katy_Perry">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/#artist"/>
+    <ns0:id>Katy_Perry</ns0:id>
+    <ns0:name>Katy Perry</ns0:name>
+    <ns0:artistsId>Q42493</ns0:artistsId>
+    <ns0:awardId>P166</ns0:awardId>
+    <ns0:from>P27</ns0:from>
+    <ns0:genre rdf:resource="http://example.org/#pop"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://example.org/#rap">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/#genre"/>
+    <ns0:id>rap</ns0:id>
+  </rdf:Description>
+
+  <ns0:user rdf:about="http://example.org/#rap_admirer">
+    <ns0:name>Rap Admirer</ns0:name>
+    <ns0:favorite_genre rdf:resource="http://example.org/#rap"/>
+  </ns0:user>
+
+  <rdf:Description rdf:about="http://example.org/#Eminem">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/#artist"/>
+    <ns0:id>Eminem</ns0:id>
+    <ns0:name>Eminem</ns0:name>
+    <ns0:artistsId>Q5608</ns0:artistsId>
+    <ns0:awardId>P166</ns0:awardId>
+    <ns0:from>P27</ns0:from>
+    <ns0:genre rdf:resource="http://example.org/#rap"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://example.org/#Snoop_Dogg">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/#artist"/>
+    <ns0:id>Snoop_Dogg</ns0:id>
+    <ns0:name>Snoop Dogg</ns0:name>
+    <ns0:artistsId>Q6096</ns0:artistsId>
+    <ns0:awardId>P166</ns0:awardId>
+    <ns0:from>P27</ns0:from>
+    <ns0:genre rdf:resource="http://example.org/#rap"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://example.org/#all">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/#genre"/>
+    <ns0:id>all</ns0:id>
+  </rdf:Description>
+
+  <ns0:user rdf:about="http://example.org/#know_all">
+    <ns0:name>Know-it-all</ns0:name>
+    <ns0:favorite_genre rdf:resource="http://example.org/#all"/>
+  </ns0:user>
+
+</rdf:RDF>

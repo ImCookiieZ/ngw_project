@@ -2,9 +2,9 @@ import fs from "fs";
 import { STANDARD_BACKGROUND, STANDARD_BORDER, QUESTIONS, STANDARD_TEXT } from "./constants.js";
 import $rdf from "rdflib";
 
-const gameString = fs.readFileSync("./storage/resources.ttl").toString();
+const gameString = fs.readFileSync("./storage/resources.rdf").toString();
 const store = $rdf.graph();
-$rdf.parse(gameString, store, "http://example.org", "text/turtle");
+$rdf.parse(gameString, store, "http://example.org", "application/rdf+xml");
 
 const queryAllUsers = () => {
     const queryString = `
