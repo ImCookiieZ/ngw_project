@@ -1,6 +1,5 @@
-import ParsingClient from "sparql-http-client/ParsingClient.js";
 import helpers from "./helpers.js";
-
+import dataFetcher from "./getOnlineData.js"
 
 export const STANDARD_BORDER = "black"
 export const STANDARD_BACKGROUND = "rgb(250,250,250)"
@@ -8,111 +7,16 @@ export const STANDARD_TEXT = "black"
 export const ENDPOINT_URL_DBPEDIA = 'https://dbpedia.org/sparql'
 export const ENDPOINT_URL_WIKIDATA = 'https://query.wikidata.org/sparql'
 
-const getPropertyDataDbpedia = async (resource, property) => {
-    let result = {
-        property: property,
-        values: []
-    }
-    const query = `SELECT ?object  WHERE { dbr:${resource} ${property} ?object . }`
-    const client = new ParsingClient({ 
-        endpointUrl: ENDPOINT_URL_DBPEDIA,  
-        headers: {
-            "Accept": "application/json",
-            "User-Agent": 'Next-Generation-Web-Group6/1.0 (stka22ac@student.ju.se) NGW-Project/1.0'}  
-    })
-    const bindings = await client.query.select(query)
-    bindings.forEach(row => 
-        Object.entries(row).forEach(([_, value]) => {
-            result.values.push(value.value)
-        })
-    )
-    return result
-}
 
-const getRandomSongFromArtistDbpedia = async (artist_name) => {
-    let songs = []
-    const query = `SELECT ?subject  WHERE { ?subject dbo:artist dbr:${artist_name} . }`
-        const client = new ParsingClient({ 
-            endpointUrl: ENDPOINT_URL_DBPEDIA,  
-            headers: {
-                "Accept": "application/json", 
-            "User-Agent": 'Next-Generation-Web-Group6/1.0 (stka22ac@student.ju.se) NGW-Project/1.0'
-        }  
-        })
-        const bindings = await client.query.select(query)
-        bindings.forEach(row => 
-            Object.entries(row).forEach(([_, value]) => {
-                songs.push(value.value)
-        }))
-        let random_songlink = songs[Math.floor(Math.random() * songs.length)]
-        let parts = random_songlink.split('/')
-        let link_songname = parts[parts.length - 1]
-        link_songname = link_songname.replaceAll(",", "\\,").replaceAll("&", "\\&").replaceAll("(", "\\(").replaceAll(")", "\\)").replaceAll("'", "\\'").replaceAll('"', '\\"').replaceAll(".", "\\.").replaceAll("!", "\\!")
-        let songname = await getPropertyDataDbpedia(link_songname, "dbp:name")
-        if (songname.values.length == 0) {
-            songname = await getPropertyDataDbpedia(link_songname, "foaf:name")
-        }
-        if (songname.values.length == 0) {
-            console.log(link_songname)
-            console.log(artist_name)
-            return await getRandomSongFromArtistDbpedia(artist_name)
-        }
-        return `'${songname.values[0]}'`
-}
-
-const getPropertyDataWikidata = async (artist_name, propertyId) => {
-    let result = {
-        property: propertyId,
-        values: []
-    }
-    const query = `SELECT ?object  WHERE { wd:${artist_name} wdt:${propertyId} ?object . }`
-        const client = new ParsingClient({ 
-            endpointUrl: ENDPOINT_URL_WIKIDATA,  
-            headers: {
-                "Accept": "application/json", 
-            "User-Agent": 'Next-Generation-Web-Group6/1.0 (stka22ac@student.ju.se) NGW-Project/1.0'
-        }  
-        })
-        const bindings = await client.query.select(query)
-        bindings.forEach(row => 
-            Object.entries(row).forEach(([_, value]) => {
-            result.values.push(value.value)
-        })
-    )
-    return result
-}
-
-const getCountyNameWikidata = async (entity_id) => {
-    let result = {
-        property: entity_id,
-        values: []
-    }
-    const query = `SELECT ?object  WHERE { wd:${entity_id} wdt:P1448 ?object . }`
-        const client = new ParsingClient({ 
-            endpointUrl: ENDPOINT_URL_WIKIDATA,  
-            headers: {
-                "Accept": "application/json", 
-            "User-Agent": 'Next-Generation-Web-Group6/1.0 (stka22ac@student.ju.se) NGW-Project/1.0'
-        }  
-        })
-        const bindings = await client.query.select(query)
-        bindings.forEach(row => 
-            Object.entries(row).forEach(([_, value]) => {
-            result.values.push(value.value)
-        })
-    )
-    return result
-}
-
-const activeQuestion = {
+const activeQuestion = { //constant for creating a question for the timespan an artist was active
     question: "When was *artist* active?",
-    getCorrectAnswer: async (artist) => {
-        const activeYearStart = await getPropertyDataDbpedia(artist.id, "dbo:activeYearsStartYear")
-        const activeYearEnd = await getPropertyDataDbpedia(artist.id, "dbo:activeYearsEndYear")
-        const activeYears = await getPropertyDataDbpedia(artist.id, "dbp:yearsActive")
-        if (activeYearEnd.values.length == 0) {
+    getCorrectAnswer: async (artist) => { //find the correct answer for the current artist on dbpedia
+        const activeYearStart = await dataFetcher.getPropertyDataDbpedia(artist.id, "dbo:activeYearsStartYear") //answer stands in one of these three properties
+        const activeYearEnd = await dataFetcher.getPropertyDataDbpedia(artist.id, "dbo:activeYearsEndYear")
+        const activeYears = await dataFetcher.getPropertyDataDbpedia(artist.id, "dbp:yearsActive")
+        if (activeYearEnd.values.length == 0) { //if active year end is not exististing the artist is still active
             if (activeYearStart.values.length == 0) {
-                return `From ${activeYears.values[0]} until Now`
+                return `From ${activeYears.values[0]} until Now` //use activeYears value only if active years start is not existing
             }
             return `From ${activeYearStart.values[0]} until Now`
         }
@@ -122,10 +26,10 @@ const activeQuestion = {
         let possible_answers = []
         let artists_done = [current_artist]
         for (let i = 0; i < 3;) {
-            const random_artist = helpers.getRandomArtistExceptDone(artists_done)
-            const activeYearStart = await getPropertyDataDbpedia(random_artist.id, "dbo:activeYearsStartYear")
-            const activeYearEnd = await getPropertyDataDbpedia(random_artist.id, "dbo:activeYearsEndYear")
-            const activeYears = await getPropertyDataDbpedia(random_artist.id, "dbp:yearsActive")
+            const random_artist = helpers.getRandomArtistExceptDone(artists_done) //get a random artist which is has not already been used for this question
+            const activeYearStart = await dataFetcher.getPropertyDataDbpedia(random_artist.id, "dbo:activeYearsStartYear") //same fuinctionality as above
+            const activeYearEnd = await dataFetcher.getPropertyDataDbpedia(random_artist.id, "dbo:activeYearsEndYear")
+            const activeYears = await dataFetcher.getPropertyDataDbpedia(random_artist.id, "dbp:yearsActive")
             let str = ""
             if (activeYearEnd.values.length == 0) {
                 if (activeYearStart.values.length == 0) {
@@ -134,8 +38,8 @@ const activeQuestion = {
                 else str = `From ${activeYearStart.values[0]} until Now`
             }
             else str = `From ${activeYearStart.values[0]} until ${activeYearEnd.values[0]}`
-            artists_done.push(random_artist)
-            if (possible_answers.includes(str) || correct_answer == str) {
+            artists_done.push(random_artist) //save that artist to save time and not fetch the same artist again
+            if (possible_answers.includes(str) || correct_answer == str) { //check that the answer is not already existing from another artist
                 continue
             }
             possible_answers.push(str)
@@ -145,10 +49,10 @@ const activeQuestion = {
     }
 
 }
-const archivementsQuestion = {
+const archivementsQuestion = { //constant for creating a question for how many awards the artist won
     question: "How many awards did *artist* win?",
-    getCorrectAnswer: async (artist) => {
-        const award_ids = await getPropertyDataWikidata(artist.artistId, artist.awardId)
+    getCorrectAnswer: async (artist) => { //find the correct answer on wikidata
+        const award_ids = await dataFetcher.getPropertyDataWikidata(artist.artistId, artist.awardId)
         return `${award_ids.values.length}`
     },
     getWrongAnswers: async (current_artist, correct_answer) => {
@@ -156,31 +60,31 @@ const archivementsQuestion = {
         let artists_done = [current_artist]
         for (let i = 0; i < 3;) {
             const random_artist = helpers.getRandomArtistExceptDone(artists_done)
-            const award_ids = await getPropertyDataWikidata(random_artist.artistId, random_artist.awardId)
+            const award_ids = await dataFetcher.getPropertyDataWikidata(random_artist.artistId, random_artist.awardId)
             const str = `${award_ids.values.length}`
-            if (possible_answers.includes(str) || correct_answer == str) {
+            artists_done.push(random_artist) //save that artist to save time and not fetch the same artist again
+            if (possible_answers.includes(str) || correct_answer == str) { //check that the answer is not already existing from another artist
                 continue
             }
             possible_answers.push(str)
-            artists_done.push(random_artist)
             i++
         }
         return possible_answers
     }
 }
-const fromQuestion = {
+const fromQuestion = { //constant for creating a question for where the artist is from
     question: "Where is *artist* from?",
     getCorrectAnswer: async (artist) => {
-        let entity_link = await getPropertyDataWikidata(artist.artistId, artist.from)
+        let entity_link = await dataFetcher.getPropertyDataWikidata(artist.artistId, artist.from)
         const parts = entity_link.values[0].split('/')
         const entity_id = parts[parts.length - 1]
-        const countries = await getCountyNameWikidata(entity_id)
+        const countries = await dataFetcher.getCountyNameWikidata(entity_id) //county is only saved by its id so fetch the name behind the id from wikidata
         return `${countries.values[0]}`
     },
     getWrongAnswers: async (_, correct_answer) => {
         let li = ["Germany", "Spain", "Mexico", "United Kingdom", "United States of America"]
-        for (let i = 0; i  < li.length; i++) {
-            if (correct_answer.includes(li[i])) {
+        for (let i = 0; i  < li.length; i++) { // take 3 random answers from the most common countries
+            if (correct_answer.includes(li[i])) { // do not include the correct answer in the list for possible wrong answers
                 li.splice(i, 1)
             }
         }
@@ -188,12 +92,12 @@ const fromQuestion = {
         return li
     }
 }
-const songQuestion =  {
+const songQuestion =  { //constant for creating a question for which song an artist created
     question: "Which song did *artist* create?",
     getCorrectAnswer: async (artist) => {
-        const songname = await getRandomSongFromArtistDbpedia(artist.id)
-        if (songname == "'undefined'") {
-            console.log(random_artist)
+        const songname = await dataFetcher.getRandomSongFromArtistDbpedia(artist.id) //fetch a random song from the artist on dbpedia
+        if (songname == "'undefined'") { // this should not happen but if it does, its possible to see which artist does not have a song in dbpedia. espacially good to have when a new artist is added
+            console.error("songname undefined for ", random_artist)
         }
         return `${songname}`
     },
@@ -202,20 +106,20 @@ const songQuestion =  {
         let artists_done = [current_artist]
         for (let i = 0; i < 3;) {
             const random_artist = helpers.getRandomArtistExceptDone(artists_done)
-            const songname = await getRandomSongFromArtistDbpedia(random_artist.id)
+            const songname = await dataFetcher.getRandomSongFromArtistDbpedia(random_artist.id)
             const str = `${songname}`
-            if (songname == "'undefined'") {
-                console.log(random_artist)
+            if (songname == "'undefined'") { // this should not happen but if it does, its possible to see which artist does not have a song in dbpedia. espacially good to have when a new artist is added
+                console.error("songname undefined for ", random_artist)
             }
-            if (possible_answers.includes(str) || correct_answer == str) {
+            artists_done.push(random_artist) //save that artist to save time and not fetch the same artist again
+            if (possible_answers.includes(str) || correct_answer == str) { //check that the answer is not already existing from another artist
                 continue
             }
             possible_answers.push(str)
-            artists_done.push(random_artist)
             i++
         }
         return possible_answers
     }
 }
-export const QUESTIONS = [activeQuestion, archivementsQuestion, fromQuestion, songQuestion]
+export const QUESTIONS = [activeQuestion, archivementsQuestion, fromQuestion, songQuestion] //export the constand QUESTIONS
 // export const QUESTIONS = [songQuestion]

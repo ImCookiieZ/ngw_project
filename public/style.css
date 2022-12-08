@@ -1,15 +1,17 @@
+/* body */
 body {
     background-color: #a4a4a4;
     font-family:  "Lucida Console", "Courier New", monospace;
 }
 
-
+/* headlines*/
 h1 {
     font-size: 80px;
     padding-bottom: 0px;
     margin: 15px;
 }
 
+/* first page */
 .start-page {
     position: fixed;
     top: 45%;
@@ -24,6 +26,7 @@ h1 {
     font-family: "Lucida Console", "Courier New", monospace;
 }
 
+/* everything that should be centered */
 .centered {
     position: absolute; /* or absolute */
     text-align: center;
@@ -31,12 +34,13 @@ h1 {
     width: 100%;
 }
 
+/* felxable container */
 .flex-container {
     display: flex;
 }
   
 
-/* button on the buttom of a page */
+/* buttons  */
 .btn {
     width: 300px;
     height: 25px;
@@ -49,13 +53,14 @@ h1 {
     cursor: pointer;
 }
 
-/* chooseAUser DropDown */
+/* chooseAUser DropDown content */
 option {
     font-family:  "Lucida Console", "Courier New", monospace;
     font-size: 20px;
     border-radius: 10px;
 }
 
+/* chooseAUser DropDown */
 select {
     font-family:  "Lucida Console", "Courier New", monospace;
     font-size: 25px;
@@ -64,7 +69,7 @@ select {
     border-radius: 10px;
 }
 
-/* question sides */
+/* answer sides */
 .answer {
     list-style-type: none;
     padding: 10px;
@@ -72,23 +77,27 @@ select {
 }
 
 
+/* answer button */
 .answer label,
 .answer input {
     display: block;
     cursor: pointer;
 }
 
+/* answer button */
 .answer input[type="radio"] {
     opacity: 0.01;
     z-index: 100;
 }
 
+/* answer button */
 .answer input[type="radio"]:checked+label,
 .Checked+label {
     color: rgb(250,250,250);
     background: blueviolet;
 }
 
+/* answer button */
 .answer label {
     text-align: center;
     list-style: none;
@@ -105,20 +114,24 @@ select {
 }
 
 
+/* answer button on hover */
 .answer label:hover {
     background: #DDD;
 }
 
+/* answer table */
 table {
     border-collapse: separate;
     border-radius: 25px;
     border: 3px black solid;
   }
 
+/* headline */
   th {
     border-bottom: 3px solid black;
   }
 
+/* alinks for redirection */
 .link {
     font-size:  20px;
     cursor: pointer;
@@ -128,6 +141,7 @@ table {
     box-sizing: border-box;
 }
 
+/* pop-up inactive*/
 .modal {
      position: fixed;
      top: 50%;
@@ -142,6 +156,7 @@ table {
 
 }
 
+/* pop-up active */
 .modal.active {
     transform: translate(-50%, -50%) scale(1);
 }
@@ -166,6 +181,7 @@ table {
     padding: 10px 15px;
 }
 
+/* hide background inactive */
 #overlay {
     position: fixed;
     opacity: 0;
@@ -177,6 +193,7 @@ table {
     background-color: rgba(0, 0, 0, .5);
 }
 
+/* hide background active */
 #overlay.active {
     opacity: 1;
     pointer-events: all;

@@ -1,12 +1,12 @@
 <h3 class="topic">Choose a user and then get started!</h3>
-<form action="http://localhost:3000/question">
+<form action="http://localhost:3000/question"> {{!-- send a get request to this url when pressing the button --}}
 <select name="username" id="userID">
-  {{#each users}}
+  {{#each users}}{{!-- loop to insert all users into the dropdown --}}
     <option value="{{favorite_genre_id}}">{{name}}</option>
 	{{/each}}
 </select>
 <br />
 
-<input type="hidden" id="current_index" value=0 name="current_index"/>
-<input type="submit" id="startBtn" Value="Begin the quiz!" class="btn" style='font-family: "Lucida Console", "Courier New", monospace;'/>
+<input type="hidden" id="current_index" value=0 name="current_index"/> {{!-- to make this automaticly send as parameter when pressing the button --}}
+<input type="submit" id="startBtn" Value="Begin the quiz!" class="btn" style='font-family: "Lucida Console", "Courier New", monospace;'/> {{!-- send the get request --}}
 </form>

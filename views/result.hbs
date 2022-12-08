@@ -2,7 +2,7 @@
     <div class="modal-header">
         <button data-close-button class="close-button">&times;</button>
     </div>
-    <div class="modal-body">
+    <div class="modal-body"> {{!-- little pop-up with a picture --}}
         <img src="https://imgur.com/gtb3hzs.png" width="300px"><br/>
         You successfully finished the quiz!
         Take a look at your results.
@@ -10,6 +10,7 @@
 </div>
 <h3 class="topic">{{questionName}} Results for the {{username}}</h3>
 <h3 class="topic" style="color:blue">You answered {{correctAnswers}}/5 questions correct</h3> 
+{{!-- list of all question and answers, colored in depending color for correct or wrong --}}
 {{> question this.quest_1}}
 <br/>
 {{> question this.quest_2}}
@@ -20,7 +21,7 @@
 <br/>
 {{> question this.quest_5}}
 <br/>
-<a href="/"><button class="btn"><label style="color: lightgrey;">Go back to home</label></button></a>
+<a href="/"><button class="btn"><label style="color: lightgrey;">Go back to home</label></button></a> {{!-- link to redirect to start page --}}
 <br/>
 <br/>
-    <div class="active" id="overlay"></div>
+<div class="active" id="overlay"></div> {{!-- let the pop-up come up when the page is loaded --}}

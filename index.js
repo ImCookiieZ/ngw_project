@@ -20,32 +20,37 @@ app.engine('hbs', handlebars.engine({
 //Serves static files (we need it to import a css file)
 app.use(express.static('public'))
 
+//Server listens to port 3000
 app.listen(port, () => console.log(`App listening to port ${port}`));
 
+//a home route rendering the side for the user to choose a profile
 app.get('/', (req, res) => {
-  const users = helpers.queryAllUsers()
+  const users = helpers.queryAllUsers() //query all users from the rdf file
   const data = {
     layout: "start",
     users: users
   }
-    res.render('chooseAUser', data);
+    res.render('chooseAUser', data); //render and send the html site for choosing the user
 });
 
+
+//a question route rendering the side for the user to fullfill a question within the quiz
 app.get('/question', async (req, res) => {
   
   const questionNumbers = ["1st", "2nd", "3rd", "4th", "Last"]
   let current_index = parseInt(req.query.current_index)
   const username = req.query.username
+  //on first execution the webpage generates all question as well as possible answers and saves what the correct answer would be
   if (current_index == 0) {
-    // create dynamic question/answer initialization here
+    // create dynamic question/answer initialization
     await helpers.getRandomQuestions(username);
   }
-  const rawdata = fs.readFileSync(`storage/${username}.json`);
-  let userData = JSON.parse(rawdata);
+  const rawdata = fs.readFileSync(`storage/${username}.json`); // read the data about the generated questinos and answers for the specific user
+  let userData = JSON.parse(rawdata); // convert to json
 
-  if (current_index != 0) {
+  if (current_index != 0) { // save the answer that was given to the question before in a file
     userData.responses.push(parseInt(req.query.answer))
-    let file = JSON.stringify(userData, null, 2)
+    let file = JSON.stringify(userData, null, 2) // make json file easy to read
     fs.writeFileSync(`storage/${username}.json`, file)
   }
   
@@ -60,20 +65,21 @@ app.get('/question', async (req, res) => {
     },
     send_index: current_index + 1,
   }
-  res.render('question', data);
+  res.render('question', data); ////render and send the html site for cthe current question
 });
 
+//a result route rendering the side for the user to see the given answers and if they were right or wrong
 app.get('/result', (req, res) => {
   const username = req.query.username
-  const rawdata = fs.readFileSync(`storage/${username}.json`);
+  const rawdata = fs.readFileSync(`storage/${username}.json`); // read the data about the generated questinos and answers for the specific user
   let userData = JSON.parse(rawdata);
   userData.responses.push(parseInt(req.query.answer))
-  let file = JSON.stringify(userData, null, 2)
-  fs.writeFileSync(`storage/${username}.json`, file)
+  let file = JSON.stringify(userData, null, 2) // make json file easy to read
+  fs.writeFileSync(`storage/${username}.json`, file) //save the last answer from the questions before
 
-  const quests = helpers.create_question_data(userData);
+  const quests = helpers.create_question_data(userData); //create the styles got the questions to color right and wrong answers
   let correct = 0
-  for (let question of quests) {
+  for (let question of quests) { //count the correct answers
     correct += question.correct
   }
   const data = {
@@ -85,5 +91,5 @@ app.get('/result', (req, res) => {
     quest_5: quests[4],
     correctAnswers: correct
   }
-  res.render('result', data)
+  res.render('result', data) //render the result page
 });

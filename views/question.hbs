@@ -1,16 +1,16 @@
 <h3 class="topic">{{questionName}} question for the {{username}}</h3>
 {{#if last}}
-<form action="http://localhost:3000/result">
+<form action="http://localhost:3000/result"> {{!-- redirect to the results page if it is the last question --}}
 {{else}}
-<form action="http://localhost:3000/question">
+<form action="http://localhost:3000/question"> {{!-- redirect to the next question page if it is NOT the last question --}}
 {{/if}}
 {{> question this.quest}}
-<input type="hidden" id="current_index" value={{send_index}} name="current_index"/>
-<input type="hidden" id="username" value={{username}} name="username"/>
+<input type="hidden" id="current_index" value={{send_index}} name="current_index"/> {{!-- add the current index to the get request --}}
+<input type="hidden" id="username" value={{username}} name="username"/> {{!-- add the username to the get request --}}
 {{#if last}}
-<input type="submit" id="resultBtn" Value="Get to the Result" class="btn" style='font-family: "Lucida Console", "Courier New", monospace;'/>
+<input type="submit" id="resultBtn" Value="Get to the Result" class="btn" style='font-family: "Lucida Console", "Courier New", monospace;'/> {{!-- redirect to the result if it was the last question --}}
 {{else}}
-<input type="submit" id="nextBtn" Value="Next question" class="btn" style='font-family: "Lucida Console", "Courier New", monospace;'/>
+<input type="submit" id="nextBtn" Value="Next question" class="btn" style='font-family: "Lucida Console", "Courier New", monospace;'/> {{!-- redirect to start to next question if its not the last --}}
 {{/if}}
 </form>
-<a href="/" class="link"><label class="link"> Cancel this quiz</label></a>
+<a href="/" class="link"><label class="link"> Cancel this quiz</label></a> {{!-- redirect to start to cancle the quiz --}}
